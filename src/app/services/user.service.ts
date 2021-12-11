@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {User} from '../models/user.model';
 import {Observable, of} from 'rxjs';
 import {LoginForm} from '../interfaces/login-form-interface';
+import {GetUsers} from '../interfaces/get-users.interface';
 
 const base_url = environment.base_url;
 declare const gapi: any;
@@ -25,6 +26,10 @@ export class UserService {
 
   get token(): string {
     return localStorage.getItem('token') || '';
+  }
+
+  get headers() {
+    return {headers: {'x-token': this.token}};
   }
 
   get uid(): string {
@@ -53,14 +58,18 @@ export class UserService {
       }));
   }
 
-  updateUser(data: { name: string, email: string, role: string }) {
+  updateUser(data: any) {
     data = {
       ...data,
       role: this.user.role
     };
-    return this.http.put(`${base_url}/users/${this.uid}`, data, {
-      headers: {'x-token': this.token}
-    });
+    return this.http.put(`${base_url}/users/${this.uid}`, data, this.headers
+    );
+  }
+
+  updateUserRole(user: User) {
+    return this.http.put(`${base_url}/users/${user.uid}`, user, this.headers
+    );
   }
 
   login(formData: LoginForm) {
@@ -100,4 +109,22 @@ export class UserService {
       });
     });
   }
+
+  getUsers(from: number = 0) {
+    return this.http.get<GetUsers>(`${base_url}/users?from=${from}`, this.headers)
+      .pipe(map(resp => {
+        const users = resp.users.map(
+          user => new User(user.name, user.email, '', user.img, user.google, user.role, user.uid));
+        return {
+          total: resp.total,
+          users
+        };
+      }));
+  }
+
+  deleteUser(user: User) {
+    return this.http.delete(`${base_url}/users/${user.uid}`, this.headers);
+  }
+
+
 }

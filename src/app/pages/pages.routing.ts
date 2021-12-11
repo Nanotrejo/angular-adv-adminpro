@@ -9,6 +9,9 @@ import {PromisesComponent} from './promises/promises.component';
 import {RxjsComponent} from './rxjs/rxjs.component';
 import {AuthGuard} from '../guards/auth.guard';
 import {PerfilComponent} from './perfil/perfil.component';
+import {UsersComponent} from './maintenances/users/users.component';
+import {HospitalsComponent} from './maintenances/hospitals/hospitals.component';
+import {DoctorsComponent} from './maintenances/doctors/doctors.component';
 
 
 const routes: Routes = [
@@ -24,6 +27,10 @@ const routes: Routes = [
       {path: 'promises', component: PromisesComponent, data: {titulo: 'Promesas'}},
       {path: 'rxjs', component: RxjsComponent, data: {titulo: 'RxJs'}},
       {path: 'perfil', component: PerfilComponent, data: {titulo: 'Perfil'}},
+
+      {path: 'users', component: UsersComponent, data: {titulo: 'Users'}},
+      {path: 'hospitals', component: HospitalsComponent, data: {titulo: 'Hospitals'}},
+      {path: 'doctors', component: DoctorsComponent, data: {titulo: 'Doctors'}},
     ]
   },
 ];
@@ -34,4 +41,4 @@ const routes: Routes = [
 })
 export class PagesRoutingModule {
 }
- 
+
