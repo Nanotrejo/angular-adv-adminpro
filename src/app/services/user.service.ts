@@ -20,7 +20,9 @@ export class UserService {
   public auth2: any;
   public user: User;
 
-  constructor(private http: HttpClient, private router: Router, private ngZone: NgZone) {
+  constructor(private http: HttpClient,
+              private router: Router,
+              private ngZone: NgZone) {
     this.googleInit();
   }
 
