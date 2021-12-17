@@ -37,6 +37,10 @@ export class SearchService {
     return results;
   }
 
+  globalSearch(search: string) {
+    return this.http.get<any[]>(`${base_url}/all/${search}`, this.headers);
+  }
+
   search(type: 'user' | 'hospital' | 'doctor', search: string) {
     return this.http.get<any[]>(`${base_url}/all/collection/${type}/${search}`, this.headers)
       .pipe(

@@ -12,10 +12,10 @@ export class SidebarComponent implements OnInit {
 
   public user: User;
 
-  menuItems: any[];
+  // menuItems: any[];
 
-  constructor(private sidebarService: SidebarService, private userService: UserService) {
-    this.menuItems = this.sidebarService.menu;
+  constructor(public sidebarService: SidebarService, private userService: UserService) {
+    // this.menuItems = this.sidebarService.menu;
     this.user = userService.user;
   }
 

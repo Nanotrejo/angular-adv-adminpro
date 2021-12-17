@@ -13,6 +13,8 @@ import {UsersComponent} from './maintenances/users/users.component';
 import {HospitalsComponent} from './maintenances/hospitals/hospitals.component';
 import {DoctorsComponent} from './maintenances/doctors/doctors.component';
 import {DoctorComponent} from './maintenances/doctors/doctor.component';
+import {SearchComponent} from './search/search.component';
+import {AdminGuard} from '../guards/admin.guard';
 
 
 const routes: Routes = [
@@ -25,14 +27,21 @@ const routes: Routes = [
       {path: 'progress', component: ProgressComponent, data: {titulo: 'ProgressBar'}},
       {path: 'grafica1', component: Grafica1Component, data: {titulo: 'Gráfica'}},
       {path: 'account-settings', component: AccountSettingsComponent, data: {titulo: 'Cuenta'}},
+      {path: 'search/:search', component: SearchComponent, data: {titulo: 'Búsqueda'}},
       {path: 'promises', component: PromisesComponent, data: {titulo: 'Promesas'}},
       {path: 'rxjs', component: RxjsComponent, data: {titulo: 'RxJs'}},
       {path: 'perfil', component: PerfilComponent, data: {titulo: 'Perfil'}},
 
-      {path: 'users', component: UsersComponent, data: {titulo: 'Users'}},
       {path: 'hospitals', component: HospitalsComponent, data: {titulo: 'Hospitals'}},
       {path: 'doctors', component: DoctorsComponent, data: {titulo: 'Doctors'}},
       {path: 'doctor/:id', component: DoctorComponent, data: {titulo: 'Doctor'}},
+
+
+      {
+        path: 'users',
+        canActivate: [AdminGuard],
+        component: UsersComponent, data: {titulo: 'Users'}
+      },
     ]
   },
 ];
